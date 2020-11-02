@@ -5,8 +5,9 @@ from sqlalchemy.orm import Session
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
-from . import crud, models, schemas
+from . import crud, models, schemas, bot
 from .database import SessionLocal, engine
+
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -87,3 +88,8 @@ def create_illness_symptoms(illness_id: int, symptoms: schemas.IllnessSymptomsCr
 @app.post("/users/symptoms/", response_model=schemas.PatientSymptoms)
 def create_patient_symptoms(symptoms: schemas.PatientSymptomsCreate, user_id: int = None, sponsee_id: int = None, db: Session = Depends(get_db)):
     return crud.create_patient_symptoms(db, symptoms, user_id, sponsee_id)
+
+
+@app.get("/botResponse")
+def get_bot_response(msg: str):
+    return str(bot.generate_response(msg))

@@ -34,8 +34,6 @@ def create_user_family(db: Session, sponsee: schemas.User_FamilyCreate, user_id:
     db.refresh(db_user_family)
     return db_user_family
 
-######################################################################################
-
 
 def get_illness_by_name(db: Session, name_of_illness: str):
     return db.query(models.Illness).filter(models.Illness.name_of_illness == name_of_illness).first()

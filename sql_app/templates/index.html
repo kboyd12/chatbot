@@ -1,24 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="/static/styles.css">
-        
-    </head>
 
-<nav>
-    <ul class="menu">
-      <li class="logo"><a href="#">Derm Chatbot</a></li>
-      <li class="item"><a href="#">Home</a></li>
-      <li class="item"><a href="#">About</a></li>
-      <li class="item"><a href="#">Contact</a></li>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-      <li class="item button"><a href="#">Log In</a></li>
-      <li class="item button secondary"><a href="#">Sign Up</a></li>
-      <li class="toggle"><a href="#"><i class="fas fa-bars"></i></a></li>
-    </ul>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="">Derm Chatbot</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</head>
 
+<body>
+    <div class="container mt-5">
+        <div class="media">
+            <div class="media-body" id="chatbox">
+                <h5 class="mt-2 "><strong>Chatbot For Derm Needs</strong></h5>
+                <p class='chatbot__message'><strong class='intro'>Hello, I’m Harry, your virtual assistant. I'm here to
+                        help
+                        with your general enquiries.</strong> Example of questions you can ask for demo purpose:
+                    <br><em></em></p>
+            </div>
+        </div>
+        <div class="input-group mt-3" id="userInput">
+            <input id="textInput" name="msg" type="text" class="form-control" placeholder="User Input"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <input id="buttonInput" type="submit" value="Submit">
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                function getBotResponse() {
+                    var rawText = $('#textInput').val()
+                    var userHtml = '<p class="userText mb-0"><span>' + 'User: ' + rawText + '</span></p>';
+                    $('#textInput').val("");
+                    $('#chatbox').append(userHtml);
+                    document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+                    $.get("/botResponse", {msg: rawText}).done(function (data) {
+                        var botHtml = '<p class="botText mt-1"><span>' + 'Bot: ' + data + '</span></p>';
+                        $("#chatbox").append(botHtml);
+                        document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+                    });
+                }
+                $('#textInput').keypress(function (e) {
+                    if (e.which == 13) {
+                        getBotResponse();
+                    }
+                });
+                $('#buttonInput').click(function () {
+                    getBotResponse();
+                })
+            });
 
+        </script>
+    </div>
+</body>
 
 </html>
