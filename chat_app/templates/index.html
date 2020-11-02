@@ -34,8 +34,7 @@
             <div class="media-body" id="chatbox">
                 <h5 class="mt-2 "><strong>Chatbot For Derm Needs</strong></h5>
                 <p class='chatbot__message'><strong class='intro'>Hello, I’m Harry, your virtual assistant. I'm here to
-                        help
-                        with your general enquiries.</strong> Example of questions you can ask for demo purpose:
+                        help with your general dermatitis inquiries.</strong>
                     <br><em></em></p>
             </div>
         </div>
@@ -55,7 +54,7 @@
                     $('#chatbox').append(userHtml);
                     document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
                     $.get("/botResponse", {msg: rawText}).done(function (data) {
-                        var botHtml = '<p class="botText mt-1"><span>' + 'Bot: ' + data + '</span></p>';
+                        var botHtml = '<p class="botText mt-1"><span>' + 'Harry: ' + data + '</span></p>';
                         $("#chatbox").append(botHtml);
                         document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
                     });

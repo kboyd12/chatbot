@@ -12,8 +12,8 @@ from .database import SessionLocal, engine
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-templates = Jinja2Templates(directory='sql_app/templates/')
-app.mount("/static", StaticFiles(directory="sql_app/static"), name="static")
+templates = Jinja2Templates(directory='chat_app/templates/')
+app.mount("/static", StaticFiles(directory="chat_app/static"), name="static")
 
 
 def get_db():

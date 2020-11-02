@@ -75,6 +75,9 @@ def generate_response(user_input):
     matched_vector.sort()
     vector_matched = matched_vector[-2]
 
+    # Remove user input from list so the corpus isn't tainted
+    article_sentences.pop()
+
     if vector_matched == 0:
         robo_response = robo_response + "I am sorry, I could not understand you"
         return robo_response
@@ -83,13 +86,14 @@ def generate_response(user_input):
             article_sentences[similar_sentence_number]
         return robo_response
 
-
-word_vectorizer = TfidfVectorizer(
-    tokenizer=get_processed_text, stop_words='english')
-all_word_vectors = word_vectorizer.fit_transform(article_sentences)
-
-
-similar_vector_values = cosine_similarity(
-    all_word_vectors[-1], all_word_vectors)
-
-similar_sentence_number = similar_vector_values.argsort()[0][-2]
+#
+#
+# word_vectorizer = TfidfVectorizer(
+#    tokenizer=get_processed_text, stop_words='english')
+#all_word_vectors = word_vectorizer.fit_transform(article_sentences)
+#
+#
+# similar_vector_values = cosine_similarity(
+#    all_word_vectors[-1], all_word_vectors)
+#
+#similar_sentence_number = similar_vector_values.argsort()[0][-2]
