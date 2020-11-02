@@ -1,0 +1,6 @@
+sqlalchemy
+fastapi
+bs4
+pydantic
+requests
+numpy
