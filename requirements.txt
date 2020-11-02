@@ -1,4 +1,5 @@
 sqlalchemy
+uvicorn
 fastapi
 bs4
 pydantic
