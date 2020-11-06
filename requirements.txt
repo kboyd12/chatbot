@@ -5,3 +5,8 @@ bs4
 pydantic
 requests
 numpy
+aiofiles
+pydantic[email]
+nltk
+sklearn
+jinja2
